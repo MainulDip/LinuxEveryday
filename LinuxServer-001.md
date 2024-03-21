@@ -4,7 +4,6 @@
 * UEFI : Unified Extensible Firmware Interface. Its a dedicated partition on hard drive.
 
 * GRUB & GRUB2 : Boot loaders. GRUB2 is the latest iteration and uses `grub.cfg` as configuration file. GRUB Legacy uses `menu.list` and `grub.conf` as configuration file.
-
 GRUB2 is customizable in `/ctc/default/grub/`, hidden boot menu (press shift to get boot log) , can boot ISO, USB, UUID, device
 
 ### Linux Kernel Loading:
@@ -83,3 +82,45 @@ Corn fields: there are 6 fields, minute (0-59), hour (0-23), day-of-month (1-31)
 proc stores all the processes.
 sys for system info
 dev for device related info
+
+### Network Connectivity with `ping`, `ip add` and `ip route`:
+`ip add` for all ip address
+`ip route` for ip routing info
+
+### Testing DNS `ping`, `dig`, `nslookup` and `host`:
+`ping` -
+`dig` - `dig [@server] host.com` test and list working dns (domain name server) and A records
+`nslookup` - `nslookup host.com [server]` - same like dig, name server lookup
+`host` - `host host.com [server]`, show mail handler as well (`mx` record)
+
+* localhost dns is listed inside `/etc/hosts` file
+
+### Network config for different distro:
+`ubuntu` - `/etc/hosts` is the first place for dns lookup. as this is listed inside `/etc/nsswitch.conf` file
+
+* a gui `network manager` can be used for configuring network
+
+### Install Source Code Softwares:
+3 steep process : extract, compile and install
+    1 - `tar -zxvf filename.tar.gz` to unzip tar.gp file
+    2 - cd into the un-zipped directory and compile. Usually there is some `Makefile` file, run that by `make` command. If there is some `config` file run that first. After compiling, run the compiles executable by just the `./compiled-filename`. But it will not install the program
+    3 - to actually install move that to `/usr/local/bin` directory, ie, `sudo mv compiled-executable-file /usr/local/bin`. Or if there are some installer file after the compilation, use `make install`.
+
+* packages installed from tarball/tar.gz source code will not auto update. Only manual update is the way
+
+### Install `.deb` package, apt/aptitude/apt-get and `dpkg` mess:
+Always use `apt` to install a `deb` package. Also don't use dpkg, because, with dpkg, package dependencies will not be installed/pulled automatically.
+`apt` - Newer, Simpler, Suggested
+`aptitude` - Older, works but not suggested
+`apt-get` - Oldest, works but not suggested
+
+if `dpkg packagename.deb` does not work, revert back the mess using `sudo dpkg -r packagename`
+
+Best way is `apt`
+
+### Red Hat Package Manger `RPM` | YUM,DUF,RPM:
+YUM is for RedHat/CentOS, stands for Yellowdog Updater Modified
+DNF for Fedora, Stands for Dandified YUM
+RMP is the low level tool used by both YUM and DNF
+
+* YUM is the suggested way to install on red hat distributions by `yum install package-name`, use `yum upgrade` to do both update and upgrade
