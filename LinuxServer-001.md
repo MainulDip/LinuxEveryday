@@ -50,7 +50,7 @@ all packages listed inside that can be managed by `system` command for immediate
 `chkconfig --list package-name` - list status of the package name
 
  ### nano, vi text editors (vim for improved vi):
-`vi` - has 2 modes, insert and command mode. `a` or `i` + enter to hop as insert mode and `esc` to switch command mode. `:wa` or `:w` to save and exit the file.
+`vi` and `vim` - has 2 modes, insert and command mode. `a` or `i` + enter to hop as insert mode and `esc` to switch command mode. `:w` to save or `:wq` to save and exit the file.
 
 `nano` is straight forward
 
@@ -120,7 +120,7 @@ Best way is `apt`
 
 ### Red Hat Package Manger `RPM` | YUM,DUF,RPM:
 YUM is for RedHat/CentOS, stands for Yellowdog Updater Modified
-DNF for Fedora, Stands for Dandified YUM
+DNF for Fedora, Stands for Dandified YUM.
 RMP is the low level tool used by both YUM and DNF
 
 * YUM is the suggested way to install on red hat distributions by `yum install package-name`, use `yum upgrade` to do both update and upgrade
