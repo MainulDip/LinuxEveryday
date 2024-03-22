@@ -7,7 +7,7 @@ Linux kernel will not load all the `Modules` at a time, rather it will load only
 
 To force kernel what module to load and what not, rather than relying auto feature, edit `/etc/modules` file for force loading and `/etc/modprobe.d/blacklist.conf` for force blacklisting can be used
 
-* use modprobe instate of insmod command for tweaking/troubleshoot kernel modules
+* use modprobe instead of insmod command for tweaking/troubleshoot kernel modules
 
 ### Kernel Panic:
 Can happen because of faulty hardware or software. 

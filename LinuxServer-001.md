@@ -49,7 +49,7 @@ all packages listed inside that can be managed by `system` command for immediate
 `chkconfig --level 3 package-name on` - will set auto start a run level 3
 `chkconfig --list package-name` - list status of the package name
 
- ### nano, vi and vim text editors:
+ ### nano, vi text editors (vim for improved vi):
 `vi` - has 2 modes, insert and command mode. `a` or `i` + enter to hop as insert mode and `esc` to switch command mode. `:wa` or `:w` to save and exit the file.
 
 `nano` is straight forward
@@ -124,3 +124,54 @@ DNF for Fedora, Stands for Dandified YUM
 RMP is the low level tool used by both YUM and DNF
 
 * YUM is the suggested way to install on red hat distributions by `yum install package-name`, use `yum upgrade` to do both update and upgrade
+
+
+### APT Package Management System:
+APT host all the repositories, from where packages can be install (apt will search the specified app from the source list and install).
+
+inside `/etc/apt` directory, `sources.list` contains all sources apps can be searched to install and `sources.list.d` is a directory which can host another `sources.list` file that will be used by default.
+
+To add a custom repository to the `sources.list` file is a two steep process
+- add the repository, ie `deb https://repositoryname.com release-type/stable repository-type/non-free/universe/`, then save and update by `apt update`
+- then add `gpg` key for signing to secure form man-in-the-middle attack. To do so, first download and add the gpg-key file from the repo by `wget -q0 https://repository.com/gpg.key | apt-key add -`. All installed keys can be checked/list in the system can be viewed by `apt-key list`. Finally update using `apt update`
+
+### PPA (alternative to APT for custom repo adding) | Personal Package Archive for Ubuntu:
+This is another way of adding a repository (instead of manual `sources.list` + gpg key way). Repository can be hooked by `add-apt-repository ppa:<repository-name>`. Which will add the new repo in the `sources.list` and download/install gpg key behind the scene.
+
+
+### Configure RedHat based dist's repository with YUM:
+Main repository configuration RedHat/CentOS resides in `/etc/yum.conf` file. And all repositories live inside `/etc/yum.repos.d` directory.
+New repo can be hooked by `yum install repo-name` and the repo will be listed inside yum.repos.d directory.
+
+### pacman for Arch Linux:
+`packman -S packagename` to install a package
+
+### User management in Linux:
+`useradd` is a low level tool, better use `adduser` command. Use `userdel` to delete user. `usermod` to modify existing user
+
+`usermod -g/-G/-a groupname username`, modify users group, -g for primary group, -G for secondary/supplementary group and -a for appending group.
+
+Using `-G` alone will replace previously users assigned group with new group. So better use `-a -G`. like `usermod -a -G groupname username`
+
+### Managing Local Groups | Primary, Secondary/Supplementary:
+Each user has its onw personal primary group in linux. Usually the primary group is same as username. Also there are Secondary/Supplementary groups that a user might belong to. Enrolling on Secondary/Supplementary group allows the user to access directories that the user's primary group has no access.
+
+`groupadd`, `groupmod` and `groupdel` are most used commands to manage groups.
+
+`groupadd somegroup` will create a new group called as is
+`groups username` will list all the user's primary and secondary/supplementary groups
+
+### Querying User Info 
+`who`, `w`, `what` and `pinky` will list all the logged in users and their info
+`whoami` will list current logged in user
+`id username` will list info about a specific user (id, group-id and groups)
+`last` will give the history of the previously logged-in users list
+
+### User Profile | `.bash-profile`, `.bashrc`:
+There are 2 types of profile, system-wide for all users and individual. There are all shell commands to setup working environment
+
+For all users/system-wide profile, `/etc/environment` is for path variables.
+
+when system boots and user logged in, `/etc/profile` script runs for system-wide. When user opens a terminal, for ubuntu `/etc/bash.bashrc` or `/etc/bashrc` (redhat) will run.
+
+Also Individual profiles are also gonna load. Which are `.bashrc`, `.profile` or `bash.profile` in `/home/user/` directory.
