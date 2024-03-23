@@ -6,9 +6,10 @@ echo Hello World
 save the file as simple.sh and run by `bash simple.sh`.
 to run a .sh file, an interpreter is required, ie bash. To see the interpreter, run `echo $SHELL`. Usually it'll be `/bin/bash`
 
-### Adding Interpreter inside shell script
+### Adding Interpreter inside shell script with `#!` She-bang:
+When bash interpreter is already set in the script, and the gets execution permission by `chmod u+x file`, the file can be run directly from terminal without specifying bash interpreter, ie, `./shellfile.sh`
 ```sh
-! /bin/bash # specifying a shell interpreter
+#!/bin/bash # specifying a shell interpreter using `#!` she-bang
 echo Hello World
 ```
 ### file inspection and permission `-rwx` | ls -l:
@@ -41,3 +42,6 @@ ie, `chmod 764 someFileName` represents
 - 7 as permission for user/owner of the file, where 6 = 4 + 2 + 0, or read and write permission
 
 - 4 as permission for other, where 4 = 4 + 0 + 0, or only read permission
+
+### Chmod using `chmod <u/g/o><+/-><rwx> file`:
+File permission can also be modified like `chmod u+x file` which gives user/owner execution permission.
