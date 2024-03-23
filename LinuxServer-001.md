@@ -118,7 +118,7 @@ if `dpkg packagename.deb` does not work, revert back the mess using `sudo dpkg -
 
 Best way is `apt`
 
-### Red Hat Package Manger `RPM` | YUM,DUF,RPM:
+### Red Hat Package Manger `RPM` | YUM,DUF,RPM
 YUM is for RedHat/CentOS, stands for Yellowdog Updater Modified
 DNF for Fedora, Stands for Dandified YUM.
 RMP is the low level tool used by both YUM and DNF

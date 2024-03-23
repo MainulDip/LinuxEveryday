@@ -1,7 +1,7 @@
 ### Overviews
 
 ### Linux kernel /boot directory:
-Kernel lives inside `/lib/modules` directory.
+Kernel lives inside `/lib/modules` directory
 
 Linux kernel will not load all the `Modules` at a time, rather it will load only necessary modules. Modules are hardware drivers.
 
