@@ -121,7 +121,7 @@ Best way is `apt`
 ### Red Hat Package Manger `RPM` | YUM,DUF,RPM
 YUM is for RedHat/CentOS, stands for Yellowdog Updater Modified
 DNF for Fedora, Stands for Dandified YUM.
-RMP is the low level tool used by both YUM and DNF.
+RMP is the low level tool used by both YUM and DNF
 
 * YUM is the suggested way to install on red hat distributions by `yum install package-name`, use `yum upgrade` to do both update and upgrade
 
