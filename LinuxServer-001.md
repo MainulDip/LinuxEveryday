@@ -70,7 +70,7 @@ Corn fields: there are 6 fields, minute (0-59), hour (0-23), day-of-month (1-31)
 * `corntab` is the special bash script for corn jobs and hold all the user modified runnable task. `corn.d` directory can also hold any custom bash script for corn jobs 
 
 ### Personalized (non root) corntab `corntab -e` and onetime job `at`:
-`corntab -e` cmd will prompt a personalized corntab that will run on behalf of a user (not root)
+`corntab -e` cmd will prompt a personalized corntab that will run on behalf of a user (not root).
 
 * `at` for one time corn job. `atq` command will print the one time corn jobs queue
 

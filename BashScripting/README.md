@@ -15,6 +15,11 @@ echo Hello World
 ### file inspection and permission `-rwx` | ls -l:
 The first block tells if something is a directory (`d`) or a file (`-`). After file/directory marking, there are 3 sections (owner/u, group/g, other/o), each containing 3 character of `rwx-`. Where r/w read/write, x for executable , and `-` for none
 
+
+- r (read)
+- w (write)
+- x (execute)
+
 ie, if a file states `-rwxrw-r--`, that means
 `-` : First dash telling its a file
 `rws` : is telling the owner/user (`u`) of this file has read, write and execution permission
@@ -23,6 +28,8 @@ ie, if a file states `-rwxrw-r--`, that means
 
 * Changing file permission | `chmod <u/g/o><-/+><r/w/x> <fileName/directoryName>`
 ie, if a file is `-rwxrw-r--`, and we want to give write permission to others, the command will be `chmod o+w fileName`
+
+* if u/g/o is not mentioned, u is the default option, ie, `chmod +x script.sh` this will modify the file with executable permission for current user 
 
 ### file permissions using numbers | `chmod 754 fileOrDirName` :
 If 3 number (instead of letter) are supplied after chmod command, each representing permissions for `user`, `group`, `other` sections sequentially
