@@ -38,8 +38,8 @@ Deleting files with `shred -u file_to_shred.txt` is almost impossible to recover
 
 `kill <PID/program-name>` is used to kill a process by its PID (processes ID) or name.
 
-### `./` and `./file.sh` for running executables:
-these will run executable bash script
+### `./file.sh` for running executables:
+this will run executable file
 
 ### `chmod` - change file permission mode & `passwd`
 `chmod +x script` will assign executable permission  of the script file for current user
@@ -53,7 +53,10 @@ There is a `-n` flag for specifying number of lines, like `<head/tail> -n number
 `wc filename.txt` returns the number of words is the file
 
 ### `grep`, `find`:
-`grep` searches for lines that match a regular expression and print them. Often used to filter any search/list results, like `listing-commands | grep filtering-text`
+`grep` (global regular expression print) searches for lines that match a regular expression and print them. Often used with piping to filter any search/list results, like `listing-commands | grep filtering-text`
+
+
+To find specific text in a text file use `grep "string" file.txt` or `file.txt grep "string"` command
 
 For searching word count of the matching result with -c flag - `grep -c "linux" long.txt`
 
