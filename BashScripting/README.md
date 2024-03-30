@@ -57,7 +57,89 @@ EOF
 Triple `<<<` is used to supply `string` input for the command
 `wc -w <<< "Hello World!"`, note double quote is obligatory 
 
-###
+### Exit Codes and Test Expression `[...]`:
+There are few exit codes which are returned if the command ran successfully or not. `echo $?` will provide exit code for the previously ran command.
+
+0 - Successful execution
+1 - Catch generic errors (“Divide by zero”, “missing operand”, “Permission denied”)
+2 - Improper command usage (“Missing keyword”, “No such file or directory”)
+127 - The issue in path resolution 
+130 - Fatal error
+255 - Out of range
+
+Testing an expression can be made by wrapping statement by square bracket `[]`
+
+```sh
+[ hello = hello ] \
+echo $? // will return 0 as true
+
+[ 1 -eq 2 ] \
+echo $?
+```
+
+### if/elif/else/fi:
+`{1,,}` here 1 is used for positional argument and double comma here is a parameter expansion which ignore case sensitivity
+
+* file.sh
+```sh
+#!/bin/bash
+
+if [${1,,} = Alex ]; then
+    echo "hi Alex"
+elif {${1,,} = SomeoneElse}; then
+    echo "Then Who Are You"
+else 
+    echo "Good Bye"
+fi # ending if clause
+```
+
+Test the file by running `./file.sh Alex`, where Alex is the positional argument
+
+
+### Function, Returns and Exit Code:
+```sh
+#!/bin/bash
+
+someFunctionDefinition(){
+    echo hello $1
+    if [ ${1,,} = Alex ]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+someFunctionDefinition $1 # calling the function
+
+if [ ${1,,} = 1 ]; then
+    echo "You're not Alex"
+fi
+
+```
+Test the file by running `./file.sh Alex`, where Alex is the positional argument
+
+### Sequential and Multiline Commands:
+For sequential bash command,
+- a separate shell script can utilize multi line commands by default
+- bash script on both terminal and script file can use `;` in between command to separate them
+- `&&` can be used everywhere
+
+For using multiline bash commands in terminal
+- black-slash `\` followed by newline without any space before the newline
+- `&&` can also be used
+
+```sh
+# using `;`
+long ; medium ; short
+
+# using `&&`
+long && medium && short
+
+# multiline
+long \
+medium &&
+short
+```
 
 ### file inspection and permission `-rwx` | ls -l and `chmod`:
 The first block tells if something is a directory (`d`) or a file (`-`). After file/directory marking, there are 3 sections (owner/u, group/g, other/o), each containing 3 character of `rwx-`
