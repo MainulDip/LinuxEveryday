@@ -44,7 +44,7 @@ http {
 ```
 
 ### Directory entrypoint | index.html vs `try_files` directive:
-By default, nginx will server `index.html` as entry point. Using `try_files /directory/other.html` we can set alternative.
+By default, nginx will server `index.html` as entry point. Using `try_files /directory/other.html` we can override this or set fallback or set http error if nothing match.
 ```conf
 location /noIndexHTMLDirectory {
     root /home/siteRootDirectory;
@@ -55,3 +55,14 @@ location /noIndexHTMLDirectory {
 using try_files, multiple fallback option can also be set, and if none succeed, error code can also be thrown
 
 `try_files /first.html /second.html /index.html =404;` here, nginx will try to server whatever exists first, if nothing found, a 404 will be thrown
+
+### Regular expression 
+add `~*` before the path to accept regular expression
+```conf
+
+location ~* /count/[0-9] {
+    root /site;
+    try_files /index.html =404;
+
+}
+```
