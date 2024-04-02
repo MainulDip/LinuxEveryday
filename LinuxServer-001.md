@@ -147,19 +147,21 @@ New repo can be hooked by `yum install repo-name` and the repo will be listed in
 `packman -S packagename` to install a package
 
 ### User management in Linux:
-`useradd` is a low level tool, better use `adduser` command. Use `userdel` to delete user. `usermod` to modify existing user
+Every Linux distribution stores all the users and their information within the `/etc/passwd` file. So use `cat /etc/passwd` to list everything related to user.
+
+- username – the account’s name.
+- x – the user’s encrypted password. The actual value is in /etc/shadow.
+- userID – the user’s identification number.
+- groupID – the group ID number the user belongs to.
+- Userinfo – extra information about the user.
+- /homedir – the user’s home directory.
+- /bin/bash – the user’s default login shell.
+
+User managements => `useradd` is a low level tool, better use `adduser` command. Use `userdel` to delete user. `usermod` to modify existing user
 
 `usermod -g/-G/-a groupname username`, modify users group, -g for primary group, -G for secondary/supplementary group and -a for appending group.
 
 Using `-G` alone will replace previously users assigned group with new group. So better use `-a -G`. like `usermod -a -G groupname username`
-
-### Managing Local Groups | Primary, Secondary/Supplementary:
-Each user has its onw personal primary group in linux. Usually the primary group is same as username. Also there are Secondary/Supplementary groups that a user might belong to. Enrolling on Secondary/Supplementary group allows the user to access directories that the user's primary group has no access.
-
-`groupadd`, `groupmod` and `groupdel` are most used commands to manage groups.
-
-`groupadd somegroup` will create a new group called as is
-`groups username` will list all the user's primary and secondary/supplementary groups
 
 ### Querying User Info 
 `who`, `w`, `what` and `pinky` will list all the logged in users and their info
@@ -175,3 +177,16 @@ For all users/system-wide profile, `/etc/environment` is for path variables.
 when system boots and user logged in, `/etc/profile` script runs for system-wide. When user opens a terminal, for ubuntu `/etc/bash.bashrc` or `/etc/bashrc` (redhat) will run.
 
 Also Individual profiles are also gonna load. Which are `.bashrc`, `.profile` or `bash.profile` in `/home/user/` directory.
+
+### Managing Local Groups | Primary, Secondary/Supplementary:
+group information is stored in the `/etc/group` file. `cat /etc/group` to read all group info
+
+Each user has its onw personal primary group in linux. Usually the primary group is same as username. Also there are Secondary/Supplementary groups that a user might belong to. Enrolling on Secondary/Supplementary group allows the user to access directories that the user's primary group has no access.
+
+`groupadd`, `groupmod` and `groupdel` are most used commands to manage groups.
+
+`groupadd somegroup` will create a new group called as is
+`groups username` will list all the user's primary and secondary/supplementary groups
+
+* Every user has a primary group usually by its name and each user can have only one primary group at a time.
+* Each group can have 0 or more users and a user's primary (also secondary) group can be another user's primary group (also secondary) 
