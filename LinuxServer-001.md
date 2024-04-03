@@ -50,7 +50,9 @@ all packages listed inside that can be managed by `system` command for immediate
 `chkconfig --list package-name` - list status of the package name
 
  ### nano, vi text editors (vim for improved vi):
-`vi` and `vim` - has 2 modes, insert and command mode. `a` or `i` + enter to hop as insert mode and `esc` to switch command mode. `:w` to save or `:wq` to save and exit the file.
+`vi` and `vim` - has 2 modes, insert and command mode. `a` or `i` (no enter/return press) to hop as insert mode and `esc` to switch command mode, also moving cursor only works in command mode. `:w` to save or `:wq` to save and exit the file. Also `:qa!` without saving.
+
+* from command mode `dd` to delete a line. Backspace will select the previous char and pressing new char will replace that
 
 `nano` is straight forward
 

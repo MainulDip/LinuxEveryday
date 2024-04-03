@@ -2,7 +2,9 @@ services:
   web:
     image: nginx:latest
     volumes:
-    - ./app:/etc/nginx/templates
+    # - ./templates:/etc/nginx/templates # mount app directory to container's http directory
+    - ./default.conf:/etc/nginx/conf.d/ # mounting custom config to containers config
+    # - ./certs:/etc/nginx/certs # for https certificates
     ports:
     - "8080:80"
     environment:

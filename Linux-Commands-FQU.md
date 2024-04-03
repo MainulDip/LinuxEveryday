@@ -76,7 +76,7 @@ The `which cmd` command outputs the full path of shell commands. like `which pyt
 `neofetch` standalone command will display system info — like kernel version, shell, and hardware — next to an ASCII logo of d Linux distro
 
 
-### `ping`, `wget`, ``unzip`:
+### `ping`, `wget`, ``unzip`
 `ping domain.com` is the networking terminal utility used to test network connectivity. ping has a ton of options, in most cases is used to hia a domain or IP address and observe returned analysis.
 
 `wget` (World Wide Web get) is a utility to retrieve content from the internet. Usages - `wget https://url.com/filename.ext`

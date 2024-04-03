@@ -66,3 +66,47 @@ location ~* /count/[0-9] {
 
 }
 ```
+
+
+### Custom Domain Mapping In Localhost and Docker Nginx:
+1st, set `127.0.0.1 customname.com` as the last entry of the `/etc/hosts` file. 
+
+2nd, either add environment entries of `n` & `n` or set servername in `nginx.conf` file
+
+* example docker-compose for virtual host setup.
+
+```yaml
+services:
+  web:
+    image: nginx:latest
+    volumes:
+    - ./app:/etc/nginx/templates
+    ports:
+    - "8080:80"
+    environment:
+    - NGINX_HOST=customname.com
+    - NGINX_PORT=80
+```
+
+* example `nginx.conf` config for virtual host. full path is `/usr/local/etc/nginx/nginx.conf`
+
+```conf
+server {
+    listen 80;
+    listen [::]:80;
+    server_name customname.com www.customname.com;
+    access_log /var/log/nginx/mysite.com.access.log;
+    error_log /var/log/nginx/mysite.com.error.log;    
+    location / {
+        proxy_pass http://127.0.0.1:3000;       
+        proxy_http_version 1.1;        
+        proxy_set_header Upgrade $http_upgrade;               
+        proxy_set_header Connection ‘upgrade’;
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+```
+
+### Docker Nginx Workflows:
+`sudo docker exec -t -i container_name /bin/bash`
