@@ -109,4 +109,4 @@ server {
 ```
 
 ### Docker Nginx Workflows:
-`sudo docker exec -t -i container_name /bin/bash`
+`sudo docker exec -t -i container_name /bin/bash` to hop into
