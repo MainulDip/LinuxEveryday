@@ -44,7 +44,7 @@ all packages listed inside that can be managed by `system` command for immediate
 
 * Using `chkconfig` to set automatic package start in different run level
 
-`chkconfig package-name on` - will set auto start value to a package on different run levels (2,3,4,5 on)
+`chkconfig package-name on` - will set auto start value to a package on different run levels (2,3,4,5 on).
 
 `chkconfig --level 3 package-name on` - will set auto start a run level 3
 `chkconfig --list package-name` - list status of the package name
