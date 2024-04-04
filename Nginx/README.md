@@ -71,7 +71,7 @@ location ~* /count/[0-9] {
 ### Custom Domain Mapping In Localhost and Docker Nginx:
 1st, set `127.0.0.1 customname.com` as the last entry of the `/etc/hosts` file. 
 
-2nd, either add environment entries of `n` & `n` or set servername in `nginx.conf` file
+2nd, listen on port 80 (80 for http and 443 for https). To serve for multiple domain, add `server_name` directive when configuring nginx's `default.conf`.
 
 * example docker-compose for virtual host setup.
 
@@ -79,31 +79,29 @@ location ~* /count/[0-9] {
 services:
   web:
     image: nginx:latest
+    container_name: dockng1
     volumes:
-    - ./app:/etc/nginx/templates
+    - ./app:/usr/share/nginx/html/ # mount app directory to container's html directory
+    - ./default.conf:/etc/nginx/conf.d/default.conf # mounting custom config to override nginx's default config
     ports:
-    - "8080:80"
-    environment:
-    - NGINX_HOST=customname.com
-    - NGINX_PORT=80
+    - "80:80"
 ```
 
-* example `nginx.conf` config for virtual host. full path is `/usr/local/etc/nginx/nginx.conf`
+* example default.conf, which will replace `/etc/nginx/conf.d/default.conf`.
 
 ```conf
 server {
-    listen 80;
-    listen [::]:80;
-    server_name customname.com www.customname.com;
-    access_log /var/log/nginx/mysite.com.access.log;
-    error_log /var/log/nginx/mysite.com.error.log;    
+    server_name www.foobar.com foobar.com;
     location / {
-        proxy_pass http://127.0.0.1:3000;       
-        proxy_http_version 1.1;        
-        proxy_set_header Upgrade $http_upgrade;               
-        proxy_set_header Connection ‘upgrade’;
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
+        root /usr/share/nginx/html/;
+    }
+}
+
+server {
+    server_name www.barfoo.com barfoo.com; # if server_name is not specified, only first server will be serverd, both are listning on port 80 and no way to differentiate the request incomming
+    location / {
+        root /usr/share/nginx/html/;
+        try_files /barfoo.html =404; // without `=404` or anyting fallback in try_files directive, nginx will throw error. try_files required to include at leat 2 options  
     }
 }
 ```
