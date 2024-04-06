@@ -106,7 +106,7 @@ dev for device related info
 3 steep process : extract, compile and install
     1 - `tar -zxvf filename.tar.gz` to unzip tar.gp file
     2 - cd into the un-zipped directory and compile. Usually there is some `Makefile` file, run that by `make` command. If there is some `config` file run that first. After compiling, run the compiles executable by just the `./compiled-filename`. But it will not install the program
-    3 - to actually install move that to `/usr/local/bin` directory, ie, `sudo mv compiled-executable-file /usr/local/bin`. Or if there are some installer file after the compilation, use `make install`.
+    3 - to actually install move that to `/usr/local/bin` directory, ie, `sudo mv compiled-executable-file /usr/local/bin`. Or if there are some installer file after the compilation, use `make install`
 
 * packages installed from tarball/tar.gz source code will not auto update. Only manual update is the way
 

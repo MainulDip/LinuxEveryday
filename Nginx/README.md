@@ -57,15 +57,52 @@ using try_files, multiple fallback option can also be set, and if none succeed, 
 `try_files /first.html /second.html /index.html =404;` here, nginx will try to server whatever exists first, if nothing found, a 404 will be thrown
 
 ### Regular expression 
-add `~*` before the path to accept regular expression
+add `~*` before the path to specify regular expression.
 ```conf
-
+# accepting and handling /count/Int url path
 location ~* /count/[0-9] {
     root /site;
     try_files /index.html =404;
 
 }
 ```
+
+### Redirect and Rewrite:
+`307` is the code for http redirect. From inside of location block, `return 307 /redirect-path` is used
+```conf
+location /url {
+    return 307 /redirect-path;
+}
+```
+Rewrite is used to show other url path's content instead of redirecting
+```conf
+rewrite ^/number/(\w+) /count/$1; # request on url /number/int will return response from /count/int without redirecting
+location ~* /count/[0-9] {
+    root /site;
+    try_files /index.html =404;
+}
+```
+
+### Load Balancer | Round Robin:
+```conf
+http {
+    # defining round robin with 4 server instance running in the background
+    upstream nameOfTheServer {
+        server 123.0.0.1:1111;
+        server 123.0.0.1:2222
+        server 123.0.0.1:3333;
+        server 123.0.0.1:4444;
+    }
+
+    server {
+        listen 8080;
+        location / {
+            proxy_pass http://nameOfTheServer/; // utilizing defined round robin
+        }
+    }
+}
+```
+
 
 
 ### Custom Domain Mapping In Localhost and Docker Nginx:
