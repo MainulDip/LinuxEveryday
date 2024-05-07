@@ -82,3 +82,11 @@ The `which cmd` command outputs the full path of shell commands. like `which pyt
 `wget` (World Wide Web get) is a utility to retrieve content from the internet. Usages - `wget https://url.com/filename.ext`
 
 `unzip images.zip`
+
+
+### Docker User, Group and Permission:
+`uid` user id and `gid` group ids are the internals of how linux manages users and group permission.
+
+`id ${USER} && echo ${USER}` to see some info related to the current user.
+
+https://stackoverflow.com/questions/29245216/write-in-shared-volumes-docker/29251160#29251160

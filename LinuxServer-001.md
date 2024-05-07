@@ -192,3 +192,11 @@ Each user has its onw personal primary group in linux. Usually the primary group
 
 * Every user has a primary group usually by its name and each user can have only one primary group at a time.
 * Each group can have 0 or more users and a user's primary (also secondary) group can be another user's primary group (also secondary) 
+
+* add existing user to a group `usermod -a -G examplegroup exampleusername` - `-a` for append and `-G` for group. Note, The usermod command requires the username instead of the numeric user ID.
+
+
+`ls -n` will show the numeric user and group id of the current directory
+
+### chown command:
+`sudo chown -R 1000:1000 themes` to change owner to 1000 and group to 1000 of the `theme` dir recursively (including all its sub directory and files)
